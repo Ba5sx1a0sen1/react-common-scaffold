@@ -1,0 +1,15 @@
+{
+  "name": "react-common-scaffold",
+  "version": "1.0.0",
+  "description": "一个React脚手架",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "React",
+    "Webpack"
+  ],
+  "author": "BassXiaosen",
+  "license": "MIT"
+}
