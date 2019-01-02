@@ -6,21 +6,24 @@ export default class MyInput extends Component {
   //   value: PropTypes.string
   // }
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state={
-
+      input: this.props.value
     }
   }
-  handle=()=>{
-
+  handle=(e)=>{
+    this.setState({input: e.target.value})
   }
   render() {
     const { value } = this.props
 
     return (
       <div>
-        <input value={value} type="text" name="input" id="input"/>
+        <input onChange={this.handle} value={this.state.input} type="text" name="input" id="input"/>
+        <p>
+          {this.state.input}
+        </p>
       </div>
     )
   }

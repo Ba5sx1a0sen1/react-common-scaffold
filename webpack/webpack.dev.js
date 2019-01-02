@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 
 module.exports={
+  devtool: "cheap-eval-source-map",
   entry: path.resolve(__dirname,'../src/index.js'),
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -24,7 +25,7 @@ module.exports={
     }),
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname,"../src/test.html"),
-      filename: "test.html"
+      filename: "test.html",
     })
   ],
   resolve: {

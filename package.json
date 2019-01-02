@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config ./webpack/webpack.prod.js --mode production",
-    "start": "webpack-dev-server --config ./webpack/webpack.dev.js --mode development --open"
+    "start": "webpack-dev-server --config ./webpack/webpack.common.js --mode development --open"
   },
   "keywords": [
     "React",
@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "normalize.css": "^8.0.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
