@@ -1,9 +1,5 @@
-const common = require('./webpack.common.js')
-const merge = require('webpack-merge')
-
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const devMode = process.env.NODE_ENV !== 'production'
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
@@ -35,9 +31,7 @@ module.exports={
       template: path.resolve(__dirname,"../src/test.html"),
       filename: "test.html"
     }),
-    new CleanWebpackPlugin({
-      
-    })
+    new CleanWebpackPlugin([path.resolve(__dirname,'../dist/*')],{allowExternal:true})
   ],
   resolve: {
     alias: {

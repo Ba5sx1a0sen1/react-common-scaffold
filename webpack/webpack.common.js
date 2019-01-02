@@ -2,7 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const devMode = process.env.NODE_ENV !== 'production'
 const HTMLWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports={
   entry: path.resolve(__dirname,'../src/index.js'),
@@ -20,6 +20,7 @@ module.exports={
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
@@ -37,5 +38,11 @@ module.exports={
     alias: {
       "@": path.resolve(__dirname, '../src')
     }
+  },
+  devServer: {
+    proxy: {'/api': 'http://localhost:3000'},
+    hot: true,
+    historyApiFallback: true,
+    port: 9966
   }
 }
