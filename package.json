@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config ./webpack/webpack.prod.js --mode production",
-    "start": "webpack-dev-server --config ./webpack/webpack.common.js --mode development --open"
+    "start": "npm run dev",
+    "dev": "webpack-dev-server --config ./webpack/webpack.dev.js --open"
   },
   "keywords": [
     "React",
