@@ -3,6 +3,7 @@ const merge = require('webpack-merge')
 const webpack = require('webpack')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const commonConfig = require('./webpack.common.js')
+const {pages, templates} = require('./utils.js')
 
 const devConfig={
   mode: 'development',
@@ -16,14 +17,16 @@ const devConfig={
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new HTMLWebpackPlugin({
-      template: path.resolve(__dirname,"../src/index.html"),
-      filename: "index.html"
-    }),
-    new HTMLWebpackPlugin({
-      template: path.resolve(__dirname,"../src/test.html"),
-      filename: "test.html"
-    })
+    // new HTMLWebpackPlugin({
+    //   template: path.resolve(__dirname,"../src/views/Index/index.html"),
+    //   filename: "index.html",
+    //   chunks: ['index']
+    // }),
+    // new HTMLWebpackPlugin({
+    //   template: path.resolve(__dirname,"../src/views/Test/test.html"),
+    //   filename: "index.html",
+    //   chunks: ['test']
+    // })
   ],
   devServer: {
     proxy: {'/api': 'http://localhost:3000'},
@@ -33,5 +36,12 @@ const devConfig={
     overlay: true,
   }
 }
+Object.keys(pages).map(filename => {
+  devConfig.plugins.push(new HTMLWebpackPlugin({
+    template: templates[filename],
+    filename: `${filename.toLowerCase()}.html`,
+    chunks: [`${filename}`]
+  }))
+})
 
 module.exports = merge(commonConfig, devConfig)

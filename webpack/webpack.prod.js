@@ -5,6 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const {pages, templates, chunkPermutaions} = require('./utils.js')
+
+const allPermutations = chunkPermutaions(Object.keys(pages))
 
 const prodConfig={
   mode: 'production',
@@ -18,14 +21,9 @@ const prodConfig={
   optimization: {
     // runtimeChunk: 'single',
     splitChunks: {
-      // chunks: 'all' //1.
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all'
-        }
-      }
+      chunks: 'all', //1.
+      automaticNameDelimiter: '~',
+      // name: true,
     }
   },
   plugins: [
@@ -33,16 +31,28 @@ const prodConfig={
       filename:  'css/[name].[hash].css',
     }),
     // new BundleAnalyzerPlugin(),
-    new HTMLWebpackPlugin({
-      template: path.resolve(__dirname,"../src/index.html"),
-      filename: "index.html"
-    }),
-    new HTMLWebpackPlugin({
-      template: path.resolve(__dirname,"../src/test.html"),
-      filename: "test.html"
-    }),
+    // new HTMLWebpackPlugin({
+    //   template: path.resolve(__dirname,"../src/views/Index/index.html"),
+    //   filename: "index.html",
+    //   chunks: ['index']
+    // }),
+    // new HTMLWebpackPlugin({
+    //   template: path.resolve(__dirname,"../src/views/Test/index.html"),
+    //   filename: "test.html",
+    //   chunks: ['test']
+    // }),
     new CleanWebpackPlugin([path.resolve(__dirname,'../dist/*')],{allowExternal:true})
   ],
 }
+
+Object.keys(pages).map(filename => {
+  const chunks = allPermutations.filter(item => item.match(filename))
+  chunks.push(filename)
+  prodConfig.plugins.push(new HTMLWebpackPlugin({
+    template: templates[filename],
+    filename: `${filename.toLowerCase()}.html`,
+    chunks
+  }))
+})
 
 module.exports = merge(commonConfig, prodConfig)

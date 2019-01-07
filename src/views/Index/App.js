@@ -1,5 +1,5 @@
 import React from "react"
-import Demopage from "./views/Demopage"
+import Demopage from "./Demopage"
 
 export default class App extends React.Component{
   render(){

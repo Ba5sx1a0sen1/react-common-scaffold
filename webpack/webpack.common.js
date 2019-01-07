@@ -1,10 +1,12 @@
 const path = require('path')
-
+const {pages} = require('./utils.js')
 module.exports={
-  entry: path.resolve(__dirname,'../src/index.js'),
+  entry: {
+    ...pages
+  },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'js/[name].[chunkhash].js',
+    filename: 'js/[name].[hash].js',
   },
   module: {
     rules: [
