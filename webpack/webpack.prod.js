@@ -13,9 +13,9 @@ const prodConfig={
   mode: 'production',
   module: {
     rules: [
-      {test: /\.css$/,  use: [MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true}},{loader:'postcss-loader'},]},
-      {test: /\.scss$/, use: [MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true}},{loader:'postcss-loader'},{loader:'sass-loader'}]},
-      {test: /\.less$/, use: [MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true}},{loader:'postcss-loader'},{loader:'less-loader'}]},
+      {test: /\.css$/,  use: [MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true,localIdentName:"[name]__[local]-[hash:base64:5]"}},{loader:'postcss-loader'},]},
+      {test: /\.scss$/, use: [MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true,localIdentName:"[name]__[local]-[hash:base64:5]"}},{loader:'postcss-loader'},{loader:'sass-loader'}]},
+      {test: /\.less$/, use: [MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true,localIdentName:"[name]__[local]-[hash:base64:5]"}},{loader:'postcss-loader'},{loader:'less-loader'}]},
     ]
   },
   optimization: {
