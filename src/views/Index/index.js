@@ -8,3 +8,5 @@ import "@/styles/global.less"
 
 
 ReactDOM.render(<App/>, document.getElementById('root'))
+
+module.hot.accept();
