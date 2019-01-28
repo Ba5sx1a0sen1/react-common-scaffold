@@ -7,12 +7,13 @@ const {pages, templates} = require('./utils.js')
 
 const devConfig={
   mode: 'development',
-  devtool: "cheap-eval-source-map",
+  devtool: "cheap-module-eval-source-map",
   module: {
     rules: [
       {test: /\.css$/,  use: ['style-loader' ,{loader:'css-loader',options:{modules:true,localIdentName:"[name]__[local]-[hash:base64:5]"}},{loader:'postcss-loader'},]},
       {test: /\.scss$/, use: ['style-loader' ,{loader:'css-loader',options:{modules:true,localIdentName:"[name]__[local]-[hash:base64:5]"}},{loader:'postcss-loader'},{loader:'sass-loader'}]},
-      {test: /\.less$/, use: ['style-loader' ,{loader:'css-loader',options:{modules:true,localIdentName:"[name]__[local]-[hash:base64:5]"}},{loader:'postcss-loader'},{loader:'less-loader'}]},
+      {test: /\.less$/, exclude:/node_modules/,use: ['style-loader' ,{loader:'css-loader',options:{modules:true}},{loader:'postcss-loader'},{loader:'less-loader', options:{javascriptEnabled:true}}]},
+      {test: /\.less$/, include:/node_modules/,use: ['style-loader' ,{loader:'css-loader'},{loader:'postcss-loader'},{loader:'less-loader', options:{javascriptEnabled:true}}]},      
     ]
   },
   plugins: [

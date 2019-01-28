@@ -10,7 +10,7 @@ let templates = {}
 entries.map(item=>{
   const split_name = item.split('/')
   pages[split_name[split_name.length - 2]] = item
-  templates[split_name[split_name.length - 2]] = item.replace(/.js$/,'.html')
+  templates[split_name[split_name.length - 2]] = item.replace(/\.js$/,'.html')
 })
 exports.pages = pages
 exports.templates = templates

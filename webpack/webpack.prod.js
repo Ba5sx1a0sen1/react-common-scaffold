@@ -15,7 +15,8 @@ const prodConfig={
     rules: [
       {test: /\.css$/,  use: [MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true,localIdentName:"[name]__[local]-[hash:base64:5]"}},{loader:'postcss-loader'},]},
       {test: /\.scss$/, use: [MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true,localIdentName:"[name]__[local]-[hash:base64:5]"}},{loader:'postcss-loader'},{loader:'sass-loader'}]},
-      {test: /\.less$/, use: [MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true,localIdentName:"[name]__[local]-[hash:base64:5]"}},{loader:'postcss-loader'},{loader:'less-loader'}]},
+      {test: /\.less$/, exclude:/node_modules/,use: [MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true}},{loader:'postcss-loader'},{loader:'less-loader', options:{javascriptEnabled:true}}]},
+      {test: /\.less$/, include:/node_modules/,use: [MiniCssExtractPlugin.loader,{loader:'css-loader'},{loader:'postcss-loader'},{loader:'less-loader', options:{javascriptEnabled:true}}]},      
     ]
   },
   optimization: {
