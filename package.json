@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config ./webpack/webpack.prod.js --mode production",
     "start": "npm run dev",
-    "dev": "webpack-dev-server --config ./webpack/webpack.dev.js --open"
+    "dev": "webpack-dev-server --inline --progress --config ./webpack/webpack.dev.js --open"
   },
   "keywords": [
     "React",
